@@ -16,7 +16,7 @@ public class Draw21 {
 		run(input);
 	}
 	
-
+	
 	public static void run(Scanner input) {
 		String userChoice = wantToPlay(input);
 		if(userChoice.equalsIgnoreCase("no") || userChoice.equalsIgnoreCase("n")) {
@@ -36,6 +36,7 @@ public class Draw21 {
 		}
 	}
 	
+	//Method that will repeatedly prompt the user if they would like to play
 	public static String wantToPlay(Scanner input) {
 		if(round < 1) {
 			System.out.println("Welcome to BlackJack. In this game we will shuffle an ordinary deck of cards and play to the classic drawing to 21 game.");
@@ -49,6 +50,7 @@ public class Draw21 {
 		return userChoice;
 	}
 	
+	//Method that will print out the scoreboard
 	public static void scoreBoard(String userChoice) {
 		System.out.println("Thanks for playing! ");
 		if(playerTotalScore != 0 || computerTotalScore != 0) {
@@ -56,6 +58,8 @@ public class Draw21 {
 		}
 	}
 	
+	//Method that will "play the game" ie. call the createDeck method,
+	//draw the cards for both the player and computer, and call the winCondition method.
 	public static void playGame(ArrayList<String> deck) {
 		round++;
 		System.out.println("Round " + round + ": ");
@@ -89,8 +93,6 @@ public class Draw21 {
 		computerCards += pointValue(temp);
 		deck.remove(mystery);
 		}
-		
-		//System.out.println("Computer currently has " + computerCards + " points");
 	
 		Scanner input = new Scanner(System.in);
 		String repeat = keepGoing(input);
@@ -128,6 +130,7 @@ public class Draw21 {
 		}
 	}
 	
+	//Method that allows the user to keep drawing cards if they would like to
 	public static String keepGoing(Scanner input) {
 		System.out.println("Would you like to stay where you are or draw another card?\nCheck\\Draw");
 		String repeat = input.nextLine();
@@ -139,6 +142,7 @@ public class Draw21 {
 		return repeat;
 	}
 	
+	//Method that calculates the aces since aces can be worth either 11 or 1 in this game
 	public static void aceCondition(int playerCards, int computerCards) {
 		if(playerHand.contains("Ace of Spades") || playerHand.contains("Ace of Clubs") ||  playerHand.contains("Ace of Hearts") ||  playerHand.contains("Ace of Diamonds")) {
 			if(playerCards > 21 ) {
@@ -151,6 +155,8 @@ public class Draw21 {
 		}
 	}
 	
+	//Method that covers all the win conditions for both the player
+	//and the computer and increments their points by whoever wins.
 	public static void winCondition(int playerCards, int computerCards) {
 
 		//in this one if they have an ace
@@ -186,12 +192,12 @@ public class Draw21 {
 		
 		//reset both card points
 		playerCards = 0;
-		computerCards = 0;
-		
-
+		computerCards = 0;	
 	}
 	
-	
+	//Method that attaches values to the associated String.
+	//This allows us to add to the user's and computer's round score as they try to 
+	//get closer to 21
 	public static int pointValue(String name) {
 		
 		if(name.contains("A")) {
@@ -217,7 +223,9 @@ public class Draw21 {
 		}
 	}
 	
-	
+	//Method that creates the deck by making two ArrayList of Strings
+	//(one of Suits and one of Values) and combining them together to 
+	//creating an ordinary 52 deck of cards
 	public static ArrayList<String> createDeck() {
 		
 		//creating suits
